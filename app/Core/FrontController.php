@@ -127,11 +127,18 @@ class FrontController {
                 , 'get');
 
         Route::add('/proveedores/add',
-                function ($cif,$codigo,$nombre,$telefono,$email,$website,$direccion,$pais) {
+                function () {
                     $controlador = new \Com\Daw2\Controllers\ProveedorController();
-                    $controlador->add($cif,$codigo,$nombre,$telefono,$email,$website,$direccion,$pais);
+                    $controlador->add();
                 }
                 , 'post');
+                
+        Route::add('/proveedores/cant_add',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\ProveedorController();
+                    $controlador->error405();
+                }
+                , 'get');
 
         Route::pathNotFound(
                 function () {

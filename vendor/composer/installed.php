@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'com/daw2',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => 'ac73fe785dbbbb9ac4b034a8a2ed2a55a6699736',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'com/daw2' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'ac73fe785dbbbb9ac4b034a8a2ed2a55a6699736',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

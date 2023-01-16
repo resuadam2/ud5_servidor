@@ -20,20 +20,25 @@ class ProveedorModel extends \Com\Daw2\Core\BaseModel {
             } else { #if everything was ok return 1
                 $stmt = $this->pdo->prepare('DELETE FROM proveedor WHERE cif=?');
                 $stmt->execute([$cif]);
-                return $stmt->rowCount() == 1;
+                if ($stmt->rowCount() == 1) {
+                    return 1;
+                }
             }
         } catch (PDOException $exception) { #if an exception happens return a -1
             return -1;
         }
     }
 
-    function add(\Com\Daw2\Proveedor $nuevo): bool {
+    function add(array $nuevo): bool {
         $size = count($this->getAll());
         $stmt = $this->pdo->prepare('INSERT INTO proveedor(cif,codigo,nombre,direccion,website,pais,email,telefono'
                 . 'VALUES(?,?,?,?,?,?,?,?');
-        $stmt->execute([$nuevo->__get(cif), $nuevo->__get(codigo), $nuevo->__get(nombre), $nuevo->__get(direccion), $nuevo->__get(website), $nuevo->__get(pais), $nuevo->__get(email), $nuevo->__get(telefono)]);
+        #$stmt->execute([$nuevo->__get(cif), $nuevo->__get(codigo), $nuevo->__get(nombre), $nuevo->__get(direccion), $nuevo->__get(website), $nuevo->__get(pais), $nuevo->__get(email), $nuevo->__get(telefono)]);
+        #$stmt->execute([$nuevo['cif'], $nuevo['codigo'], $nuevo['nombre'], $nuevo['direccion'], $nuevo['website'], $nuevo['pais'], $nuevo['email'], $nuevo['telefono']);
+        $stmt->execute($nuevo);
         $new_size = count($this->getAll());
-        if(($size + 1) == $new_size) {
+
+        if (($size + 1) == $new_size) {
             return true;
         } else {
             return false;

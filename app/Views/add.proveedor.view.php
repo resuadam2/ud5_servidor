@@ -10,8 +10,8 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <!--form action="/proveedores/add/" method="post"-->         
-                <form method="get">
+                <form action="/proveedores/add/" method="post">         
+                <!--form method="get"-->
                     <div class="row">
                     <div class="mb-3 col-sm-6">
                         <label for="cif">CIF</label>
@@ -48,6 +48,7 @@
                     </div>
                     <div class="mb-3 col-sm-10"></div>
                     <div class="mb-3 m-1">
+    
                         <input type="submit" value="Enviar" class="btn btn-primary"/>
                     </div>
                     <div class="mb-3 m-1">

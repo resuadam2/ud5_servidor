@@ -52,13 +52,23 @@ class ProveedorController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'detail.proveedor.view.php', 'templates/footer.view.php'), $data);
     }
 
-    function add(string $cif, string $codigo, string $nombre, string $telefono, string $email, string $website, string $direccion, string $pais) {
+    function add() {
         $modelo = new \Com\Daw2\Models\ProveedorModel();
-        $nuevo = new \Com\Daw2\Proveedor($cif, $codigo, $nombre, $direccion, $website, $pais, $email);
-        if ($telefono != null) {
-            $nuevo->__set("telefono", $telefono);
-        }
+        $nuevo = ['cif' => $_POST('cif'),
+            'codigo' => $_POST('codigo'),
+            'nombre' => $_POST('nombre'),
+            'direccion'=>$_POST('direccion'),
+            'website'=>$_POST('website'),
+            'pais'=>$_POST('pais'),
+            'telefono'=>$_POST('telefono')
+            ];
+            #'cif' = $_POST('cif'),$_POST('codigo'),$_POST('nombre'),$_POST('direccion'),$_POST('website'),$_POST('pais'),$_POST('email'));
+        /*
+        if ($_POST('telefono') != null) {
+            $nuevo->__set("telefono", $_POST('telefono'));
+        }*/
         $result = $modelo->add($nuevo);
+        
         if ($result == 1) {
             header('Location: /proveedores');
         } else if ($result == 0) {
