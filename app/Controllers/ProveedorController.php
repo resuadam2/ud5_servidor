@@ -18,7 +18,9 @@ class ProveedorController extends \Com\Daw2\Core\BaseController {
     }
 
     function mostrarAdd() {
+        $data = [];
         $data['titulo'] = 'Nuevo proveedor';
+        $data['seccion'] = '/proveedores/add';
         $this->view->showViews(array('templates/header.view.php', 'add.proveedor.view.php', 'templates/footer.view.php'), $data);
     }
 
@@ -52,30 +54,64 @@ class ProveedorController extends \Com\Daw2\Core\BaseController {
         $this->view->showViews(array('templates/header.view.php', 'detail.proveedor.view.php', 'templates/footer.view.php'), $data);
     }
 
-    function add() {
-        $modelo = new \Com\Daw2\Models\ProveedorModel();
-        $nuevo = ['cif' => $_POST('cif'),
-            'codigo' => $_POST('codigo'),
-            'nombre' => $_POST('nombre'),
-            'direccion'=>$_POST('direccion'),
-            'website'=>$_POST('website'),
-            'pais'=>$_POST('pais'),
-            'telefono'=>$_POST('telefono')
-            ];
-            #'cif' = $_POST('cif'),$_POST('codigo'),$_POST('nombre'),$_POST('direccion'),$_POST('website'),$_POST('pais'),$_POST('email'));
-        /*
-        if ($_POST('telefono') != null) {
-            $nuevo->__set("telefono", $_POST('telefono'));
-        }*/
-        $result = $modelo->add($nuevo);
-        
-        if ($result == 1) {
-            header('Location: /proveedores');
-        } else if ($result == 0) {
-            header('Location: /proveedores/cant_add)');
+    function add() : void{
+        $data = [];
+        $data['titulo'] = 'Nuevo Proveedor';
+        $data['seccion'] = '/proveedores/add';
+        $data['errores'] = $this->checkFormAdd($_POST);
+        if (count($data['errores']) === 0) {
+            $modelo = new \Com\Daw2\Models\ProveedorModel();
+            $result = $modelo->add($_POST['cif'],$_POST['codigo'],$_POST['nombre'],$_POST['direccion'],$_POST['website'],$_POST['pais'],$_POST['email'],$_POST['telefono']);
+            
+            if ($result == 1) {
+                header('Location: /proveedores');
+            } else if ($result == 0) {
+                header('Location: /proveedores/cant_add)');
+            } else {
+                header('location: methodNotAllowed');
+            }
         } else {
-            header('location: methodNotAllowed');
+             $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+            $this->view->showViews(array('templates/header-datatable.view.php', 'add.proveedor.view.php', 'templates/footer-datatable.view.php'), $data);
         }
+    }
+
+    function checkFormAdd(array $post): array {
+        $errores = [];
+        if (empty($post['cif'])) {
+            $errores['cif'] = "Campo obligatorio";
+        } else if (!preg_match("/[a-zA-Z][0-9]{7}[a-zA-Z]/", $post['cif'])) {
+            $errores['cif'] = "El cif debe seguir el siguiente formato: A0000000A";
+        }
+
+        if (empty($post['codigo'])) {
+            $errores['codigo'] = "Campo obligatorio";
+        }
+
+        if (empty($post['nombre'])) {
+            $errores['nombre'] = "Campo obligatorio";
+        }
+
+        if (empty($post['website'])) {
+            $errores['website'] = "Campo obligatorio";
+        }
+
+        if (empty($post['email'])) {
+            $errores['email'] = "Campo obligatorio";
+        }
+
+        if (empty($post['pais'])) {
+            $errores['pais'] = "Campo obligatorio";
+        }
+
+        if (empty($post['direccion'])) {
+            $errores['direccion'] = "Campo obligatorio";
+        }
+
+        if (!preg_match("/[0-9+]+/", $post['telefono'])) {
+            $errores['telefono'] = "El telefono debe tener un formato válido";
+        }
+        return $errores;
     }
 
 }
