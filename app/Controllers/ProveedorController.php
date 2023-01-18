@@ -84,6 +84,13 @@ class ProveedorController extends \Com\Daw2\Core\BaseController {
             $this->view->showViews(array('templates/header-datatable.view.php', 'add.proveedor.view.php', 'templates/footer-datatable.view.php'), $data);
         }
     }
+    
+    function cant_add() {
+        $data = [];
+        $data['titulo'] = 'No se puede crear el proveedor con un cif ya existente';
+        $data['seccion'] = '/proveedores/add';
+        $this->view->showViews(array('templates/header.view.php', 'add.proveedor.view.php', 'templates/footer.view.php'), $data);
+    }
 
     function edit($cif): void {
         $data = [];
@@ -92,8 +99,7 @@ class ProveedorController extends \Com\Daw2\Core\BaseController {
         $data['errores'] = $this->checkFormAdd($_POST);
         if (count($data['errores']) === 0) {
             $modelo = new \Com\Daw2\Models\ProveedorModel();
-            $result = $modelo->edit($cif, $_POST['codigo'], $_POST['nombre'], $_POST['direccion'], $_POST['website'], $_POST['pais'], $_POST['email'], $_POST['telefono']);
-            echo $result;
+            $result = $modelo->edit($cif, $_POST['codigo'], $_POST['nombre'], $_POST['direccion'], $_POST['website'], $_POST['pais'], $_POST['email'], $_POST['telefono']);          
             if ($result) {
                 header('Location: /proveedores');
             } else {

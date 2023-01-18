@@ -143,7 +143,7 @@ class FrontController {
         Route::add('/proveedores/cant_add',
                 function () {
                     $controlador = new \Com\Daw2\Controllers\ProveedorController();
-                    $controlador->error405();
+                    $controlador->cant_add();
                 }
                 , 'get');
 

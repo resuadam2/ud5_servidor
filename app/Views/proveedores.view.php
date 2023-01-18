@@ -12,7 +12,7 @@
         <div class="card shadow mb-4">
             <div
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Proveedores</h6>    
+                <h6 class="m-0 installfont-weight-bold text-primary">Proveedores</h6>    
                 <div class="m-0 font-weight-bold justify-content-end">
                     <a href="/proveedores/add/" class="btn btn-primary ml-1"> Nuevo Proveedor <i class="fas fa-plus-circle"></i></a>
                 </div>

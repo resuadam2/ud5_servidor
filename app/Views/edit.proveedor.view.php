@@ -12,7 +12,7 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form action="/proveedor/edit/<?php echo $proveedor['cif'] ?>" method="post">         
+                <form action="/proveedores/edit/<?php echo $proveedor['cif'] ?>" method="post">         
                     <div class="row">
                         <div class="mb-3 col-sm-6">
                             <label for="cif">CIF</label>
