@@ -75,7 +75,19 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/proveedores" class="nav-link <?php echo isset($seccion) && $seccion === '/usuarios/carlos' ? 'active' : ''; ?>">
+                    <a href="/productos" class="nav-link <?php echo isset($seccion) && $seccion === '/productos' ? 'active' : ''; ?>">
+                        <i class="fas fa-shopping-bag nav-icon"></i>
+                        <p>Productos</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/categorias" class="nav-link <?php echo isset($seccion) && $seccion === '/categorias' ? 'active' : ''; ?>">
+                        <i class="fas fa-folder nav-icon"></i>
+                        <p>Categorías</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/proveedores" class="nav-link <?php echo isset($seccion) && $seccion === '/proveedores' ? 'active' : ''; ?>">
                         <i class="fas fa-handshake nav-icon"></i>
                         <p>Proveedores</p>
                     </a>
