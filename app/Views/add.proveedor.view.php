@@ -60,7 +60,7 @@
                                    <p class="text-danger"><?php echo isset($errores['website']) ? $errores['website'] : ''; ?></p>
 
                         </div>
-                        <div class="mb-3 col-sm-10"></div>
+                        <div class="mb-3 col-sm-9"></div>
                         <div class="mb-3 m-1">
                             <input type="submit" value="Enviar" name="enviar" class="btn btn-primary"/>
                         </div>

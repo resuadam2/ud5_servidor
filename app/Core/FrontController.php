@@ -113,11 +113,18 @@ class FrontController {
                 , 'get');
 
         Route::add('/proveedores/edit/([A-Za-z0-9]+)',
-                function ($proveedor) {
+                function ($cif) {
                     $controlador = new \Com\Daw2\Controllers\ProveedorController();
-                    $controlador->edit($proveedor);
+                    $controlador->mostrarEdit($cif);
                 }
-                , 'post');
+                , 'get');        
+                
+        Route::add('/proveedores/edit/([A-Za-z0-9]+)',
+                function ($cif) {
+                    $controlador = new \Com\Daw2\Controllers\ProveedorController();
+                    $controlador->edit($cif);
+                }
+                , 'post');          
 
         Route::add('/proveedores/add',
                 function () {

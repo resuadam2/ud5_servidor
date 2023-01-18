@@ -34,7 +34,7 @@ class ProveedorModel extends \Com\Daw2\Core\BaseModel {
         $stmt = $this->pdo->prepare('INSERT INTO proveedor(cif,codigo,nombre,direccion,website,pais,email,telefono) values (?,?,?,?,?,?,?,?)');
         $stmt->execute([
             $cif, $codigo, $nombre, $direccion, $website, $pais, $email, $telefono]
-                );
+        );
         $new_size = count($this->getAll());
 
         if (($size + 1) == $new_size) {
@@ -43,11 +43,29 @@ class ProveedorModel extends \Com\Daw2\Core\BaseModel {
             return false;
         }
     }
-   
+
     function view(string $cif): array {
         $stmt = $this->pdo->prepare('SELECT * FROM proveedor WHERE cif=?');
         $stmt->execute([$cif]);
         return $stmt->fetchAll();
+    }
+    
+    function showEdit(string $cif): array {
+        $stmt = $this->pdo->prepare('SELECT * FROM proveedor WHERE cif=?');
+        $stmt->execute([$cif]);
+        return $stmt->fetchAll();
+    }
+
+    function edit(string $cif, string $codigo, string $nombre, string $direccion, string $website, string $pais, string $email, string $telefono): bool {
+        try {
+            $stmt = $this->pdo->prepare('UPDATE proveedor SET codigo=?, nombre=?, direccion=?, website=?, pais=?, email=?. telefono=? WHERE cif=?');
+            $stmt->execute([$codigo, $nombre, $direccion,$website,$pais,$email,$telefono,$cif]);
+            return $stmt->fetchAll() == 1;
+            
+        } catch (PDOException $ex) {
+            echo "cant update for some reason: " . $ex->getMessage();
+            return false;
+        }
     }
 
 }

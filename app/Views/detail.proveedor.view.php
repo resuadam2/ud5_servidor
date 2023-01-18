@@ -47,7 +47,7 @@
                         <label for="website">Website</label>
                         <input class="form-control-plaintext" id="website" type="url" name="website" placeholder="<?php echo $proveedor['website'] ?>" disabled>
                     </div>
-                    <div class="mb-3 col-sm-10"></div>                   
+                    <div class="mb-3 col-sm-9"></div>                   
                     <div class="mb-3 m-1">
                         <a href="/proveedores" class="btn btn-default">Volver</a>
                     </div>

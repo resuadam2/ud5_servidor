@@ -14,7 +14,7 @@
                 class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Proveedores</h6>    
                 <div class="m-0 font-weight-bold justify-content-end">
-                    <a href="/proveedores/add/" target="_blank" class="btn btn-primary ml-1"> Nuevo Proveedor <i class="fas fa-plus-circle"></i></a>
+                    <a href="/proveedores/add/" class="btn btn-primary ml-1"> Nuevo Proveedor <i class="fas fa-plus-circle"></i></a>
                 </div>
             </div>
             <!-- Card Body -->
@@ -44,7 +44,7 @@
                         <?php
                         foreach($proveedores as $p){
                         ?>
-                        <tr class="<?php echo $p['pais'] != 'España' ? 'table-warning' :  ''; ?>">
+                        <tr class="<?php #echo $p['pais'] != 'España' ? 'table-warning' :  ''; ?>">
                             <td><?php echo $p['cif']; ?></td>
                             <td><?php echo $p['codigo']; ?></td>
                             <td><?php echo $p['nombre']; ?> <a href="<?php echo $p['website']; ?>" target="_blank"><i class="text-sm ml-1 fas fa-external-link-alt"></i></a></td>
@@ -71,9 +71,9 @@
                             -->
                             
                             <td>
-                                <a href="/proveedores/view/<?php echo $p['cif']; ?>" target="_blank" class="btn btn-default ml-1"><i class="fas fa-eye"></i></a>
-                                <a href="/proveedores/edit/<?php echo $p['cif']; ?>" target="_blank" class="btn btn-success ml-1"><i class="fas fa-edit"></i></a>
-                                <a href="/proveedores/delete/<?php echo $p['cif']; ?>" target="_blank" class="btn btn-danger ml-1"><i class="fas fa-trash"></i></a>
+                                <a href="/proveedores/view/<?php echo $p['cif']; ?>" class="btn btn-default ml-1"><i class="fas fa-eye"></i></a>
+                                <a href="/proveedores/edit/<?php echo $p['cif']; ?>" class="btn btn-success ml-1"><i class="fas fa-edit"></i></a>
+                                <a href="/proveedores/delete/<?php echo $p['cif']; ?>" class="btn btn-danger ml-1"><i class="fas fa-trash"></i></a>
                             </td>
 
                         </tr>
