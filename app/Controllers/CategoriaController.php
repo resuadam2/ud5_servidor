@@ -10,31 +10,34 @@ class CategoriaController extends \Com\Daw2\Core\BaseController {
         $data = [];
         $data['titulo'] = 'Todas las categorías';
         $data['seccion'] = '/categorias';
-
+        
         $modelo = new \Com\Daw2\Models\CategoriaModel();
         $data['categorias'] = $modelo->getAll();
 
         $this->view->showViews(array('templates/header.view.php', 'categorias.view.php', 'templates/footer.view.php'), $data);
     }
-    
+
     function getNombreCategoria(string $id): string {
         $modelo = new \Com\Daw2\Models\CategoriaModel();
-        return $modelo->getNombreCategoria($id);
+        $toret =  $modelo->getNombreCategoria($id)[0];
+        return $toret['nombre_categoria'];
     }
 
     function mostrarAdd() {
         $data = [];
         $data['titulo'] = 'Nueva categoría';
         $data['seccion'] = '/categorias/add';
+        $modelo = new \Com\Daw2\Models\CategoriaModel();
+        $data['categorias'] = $modelo->getAll();
         $this->view->showViews(array('templates/header.view.php', 'add.categoria.view.php', 'templates/footer.view.php'), $data);
     }
 
     function mostrarEdit($id) {
         $data = [];
         $modelo = new \Com\Daw2\Models\CategoriaModel();
-
-        $data['titulo'] = 'Categoría ' .$modelo->getNombre($id).' con ID: '. $id;
-        $data['categorias'] = $modelo->showEdit($id);
+        $data['categorias'] = $modelo->getAll();
+        $data['titulo'] = 'Categoría ' . $this->getNombreCategoria($id) . ' con ID: ' . $id;
+        $data['categoria'] = $modelo->showEdit($id);
         $this->view->showViews(array('templates/header.view.php', 'edit.categoria.view.php', 'templates/footer.view.php'), $data);
     }
 
@@ -62,8 +65,8 @@ class CategoriaController extends \Com\Daw2\Core\BaseController {
 
     function view(string $id) {
         $data = [];
-       $modelo = new \Com\Daw2\Models\CategoriaModel();
-        $data['titulo'] = 'Categoría ' .$modelo->getNombre($id).' con ID: '. $id;
+        $modelo = new \Com\Daw2\Models\CategoriaModel();
+        $data['titulo'] = 'Categoría ' . $this->getNombreCategoria($id) . ' con ID: ' . $id;
         $data['categorias'] = $modelo->view($id);
 
         $this->view->showViews(array('templates/header.view.php', 'detail.categoria.view.php', 'templates/footer.view.php'), $data);
@@ -81,7 +84,7 @@ class CategoriaController extends \Com\Daw2\Core\BaseController {
             if ($result == 1) {
                 header('Location: /categorias');
             } else if ($result == 0) {
-                header('Location: /categorias/cant_add)');
+                header('Location: /categorias/cant_add');
             } else {
                 header('location: methodNotAllowed');
             }
@@ -90,7 +93,7 @@ class CategoriaController extends \Com\Daw2\Core\BaseController {
             $this->view->showViews(array('templates/header-datatable.view.php', 'add.categoria.view.php', 'templates/footer-datatable.view.php'), $data);
         }
     }
-    
+
     function cant_add() {
         $data = [];
         $data['titulo'] = 'No se puede crear la categoría debido a que el ID ya existe.';
@@ -105,7 +108,7 @@ class CategoriaController extends \Com\Daw2\Core\BaseController {
         $data['errores'] = $this->checkFormAdd($_POST);
         if (count($data['errores']) === 0) {
             $modelo = new \Com\Daw2\Models\CategoriaModel();
-            $result = $modelo->edit($id, $_POST['nombre_categoria'], $_POST['id_padre']);          
+            $result = $modelo->edit($_POST['id_categoria'], $_POST['nombre_categoria'], $_POST['id_padre'], $id);
             if ($result) {
                 header('Location: /categorias');
             } else {
@@ -139,13 +142,6 @@ class CategoriaController extends \Com\Daw2\Core\BaseController {
             $errores['nombre_categoria'] = "Campo obligatorio";
         }
 
-        if (empty($post['id_padre'])) {
-            $errores['id_padre'] = "Campo obligatorio";
-        } else if (!preg_match("/[0-9]{1,11}/", $post['id_padre'])) {
-            $errores['id_padre'] = "El ID solo puede contener números enteros hasta 11 cifras como máximo.";
-        }
-
-        
         return $errores;
     }
 

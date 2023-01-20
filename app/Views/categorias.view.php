@@ -1,11 +1,11 @@
 <div class="row">       
     <?php
-    if(isset($error)){
+    if (isset($error)) {
         ?>
-    <div class="col-12">
-        <div class="alert alert-danger"><p><?php echo $error; ?></p></div>
-    </div>
-    <?php
+        <div class="col-12">
+            <div class="alert alert-danger"><p><?php echo $error; ?></p></div>
+        </div>
+        <?php
     }
     ?>
     <div class="col-12">
@@ -20,60 +20,57 @@
             <!-- Card Body -->
             <div class="card-body" id="card_table">
                 <div id="button_container" class="mb-3"></div>
-                <?php 
-                if(count($categorias) > 0){   
+                <?php
+                if (count($categorias) > 0) {
                     $controller = new \Com\Daw2\Controllers\CategoriaController();
-                ?>
-                <!--<form action="./?sec=formulario" method="post">                   -->
-                <table id="tabladatos" class="table table-striped">                    
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>                          
-                            <th>ID Categoría Padre</th>                            
-                            <th>Categoría Padre</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        foreach($categorias as $c){
-                        ?>
-                        <tr class="<?php #echo $p['pais'] != 'España' ? 'table-warning' :  ''; ?>">
-                            <td><?php echo $c['id_categoria']; ?></td>
-                            <td><?php echo $c['nombre_categoria']; ?></td>
-                            <td><?php echo $c['id_padre']; ?></td>    
-                            
-                            <td><?php if ($c['id_padre'] != null){
-                                
-                                echo $controller->getNombreCategoria($c['id_padre']);
-                                
-                            }
-                                ?></td>   
-                            }
-                         
-                            <td>
-                                <a href="/productos/view/<?php echo $c['id_categoria']; ?>" class="btn btn-default ml-1"><i class="fas fa-eye"></i></a>
-                                <a href="/productos/edit/<?php echo $c['id_categoria']; ?>" class="btn btn-success ml-1"><i class="fas fa-edit"></i></a>
-                                <a href="/productos/delete/<?php echo $c['id_categoria']; ?>" class="btn btn-danger ml-1"><i class="fas fa-trash"></i></a>
-                            </td>
+                    ?>
+                    <!--<form action="./?sec=formulario" method="post">                   -->
+                    <table id="tabladatos" class="table table-striped">                    
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>                          
+                                <th>ID Categoría Padre</th>                            
+                                <th>Categoría Padre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($categorias as $c) {
+                                ?>
+                                <tr class="<?php #echo $p['pais'] != 'España' ? 'table-warning' :  '';  ?>">
+                                    <td><?php echo $c['id_categoria']; ?></td>
+                                    <td><?php echo $c['nombre_categoria']; ?></td>
+                                    <td><?php echo $c['id_padre']; ?></td>    
 
-                        </tr>
-                        <?php
-                        }
-                        ?>
-                    </tbody>
-                    <tfoot>
-                        Total de registros: <?php echo count($categorias); ?>
-                    </tfoot>
-                </table>
-                <?php
-                
-                
+                                    <td><?php
+                                        if ($c['id_padre'] !== null) {
+
+                                            echo $controller->getNombreCategoria($c['id_padre']);
+                                        }
+                                        ?></td>   
+
+
+                                    <td>
+                                        <a href="/categorias/view/<?php echo $c['id_categoria']; ?>" class="btn btn-default ml-1"><i class="fas fa-eye"></i></a>
+                                        <a href="/categorias/edit/<?php echo $c['id_categoria']; ?>" class="btn btn-success ml-1"><i class="fas fa-edit"></i></a>
+                                        <a href="/categorias/delete/<?php echo $c['id_categoria']; ?>" class="btn btn-danger ml-1"><i class="fas fa-trash"></i></a>
+                                    </td>
+
+                                </tr>
+                                <?php
                             }
-                else{
-                ?>
-                <p class="text-danger">No existen registros que cumplan los requisitos.</p>
-                <?php
+                            ?>
+                        </tbody>
+                        <tfoot>
+                            Total de registros: <?php echo count($categorias); ?>
+                        </tfoot>
+                    </table>
+                    <?php
+                } else {
+                    ?>
+                    <p class="text-danger">No existen registros que cumplan los requisitos.</p>
+                    <?php
                 }
                 ?>
             </div>

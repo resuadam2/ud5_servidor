@@ -10,21 +10,22 @@ class CategoriaModel extends \Com\Daw2\Core\BaseModel {
         $stmt = $this->pdo->query('SELECT * FROM categoria');
         return $stmt->fetchAll();
     }
-    
-    function getNombreCategoria(string $id): string {
-        $stmt = $this->pdo->query('SELECT nombre_categoria FROM categoria WHERE id_caategoria=?');
-        return $stmt->execute([$id]);
+
+    function getNombreCategoria(string $id): array {
+        $stmt = $this->pdo->prepare('SELECT nombre_categoria FROM categoria WHERE id_categoria=?');
+        $stmt->execute([$id]);
+        return $stmt->fetchAll();
     }
 
-    function delete(string $cif): int {
+    function delete(string $id): int {
         try { #if there are products enroled to the provider returns 0
-            $stmt = $this->pdo->prepare('SELECT * FROM producto WHERE proveedor=?');
-            $stmt->execute([$cif]);
+            $stmt = $this->pdo->prepare('SELECT * FROM producto WHERE id_categoria=?');
+            $stmt->execute([$id]);
             if ($stmt->rowCount() > 0) {
                 return 0;
             } else { #if everything was ok return 1
-                $stmt = $this->pdo->prepare('DELETE FROM categoria WHERE cif=?');
-                $stmt->execute([$cif]);
+                $stmt = $this->pdo->prepare('DELETE FROM categoria WHERE id_categoria=?');
+                $stmt->execute([$id]);
                 if ($stmt->rowCount() == 1) {
                     return 1;
                 }
@@ -34,13 +35,21 @@ class CategoriaModel extends \Com\Daw2\Core\BaseModel {
         }
     }
 
-    function add(string $cif, string $codigo, string $nombre, string $direccion, string $website, string $pais, string $email, string $telefono): bool {
+    function add(string $id, string $nombre, string $idPadre): bool {
         try {
             $size = count($this->getAll());
-            $stmt = $this->pdo->prepare('INSERT INTO categoria(cif,codigo,nombre,direccion,website,pais,email,telefono) values (?,?,?,?,?,?,?,?)');
-            $stmt->execute([
-                $cif, $codigo, $nombre, $direccion, $website, $pais, $email, $telefono]
-            );
+            if ($idPadre !== null && $idPadre !== '') {
+                $stmt = $this->pdo->prepare('INSERT INTO categoria(id_categoria, nombre_categoria, id_padre) values (?,?,?)');
+                $stmt->execute([
+                    $id, $nombre, $idPadre]
+                );
+            } else {
+                $stmt = $this->pdo->prepare('INSERT INTO categoria(id_categoria, nombre_categoria) values (?,?)');
+                $stmt->execute([
+                    $id, $nombre]
+                );
+            }
+
             $new_size = count($this->getAll());
 
             if (($size + 1) == $new_size) {
@@ -49,28 +58,42 @@ class CategoriaModel extends \Com\Daw2\Core\BaseModel {
                 return false;
             }
         } catch (\PDOException $e) {
+            echo $e->getMessage();
             return false;
         }
     }
+    /*
+    function idPadreOk(string $id): bool {
+        $stmt = $this->pdo->query('SELECT id_categoria FROM categoria');
+        $ids [] = $stmt->fetchAll();
+        foreach ($ids as $actual) {
+            if ($actual === $id) {
+                return true;
+            }
+        }
+        return false;
+    }
+     * 
+     */
 
-    function view(string $cif): array {
-        $stmt = $this->pdo->prepare('SELECT * FROM categoria WHERE cif=?');
-        $stmt->execute([$cif]);
+    function view(string $id): array {
+        $stmt = $this->pdo->prepare('SELECT * FROM categoria WHERE id_categoria=?');
+        $stmt->execute([$id]);
         return $stmt->fetchAll();
     }
 
-    function showEdit(string $cif): array {
-        $stmt = $this->pdo->prepare('SELECT * FROM categoria WHERE cif=?');
-        $stmt->execute([$cif]);
+    function showEdit(string $id): array {
+        $stmt = $this->pdo->prepare('SELECT * FROM categoria WHERE id_categoria=?');
+        $stmt->execute([$id]);
         return $stmt->fetchAll();
     }
 
-    function edit(string $cif, string $codigo, string $nombre, string $direccion, string $website, string $pais, string $email, string $telefono): bool {
+    function edit(string $id, string $nombre, string $id_padre, string $idOriginal): bool {
         try {
-            $stmt = $this->pdo->prepare('UPDATE categoria SET codigo=?, nombre=?, direccion=?, website=?, pais=?, email=?, telefono=? WHERE cif=?');
-            return $stmt->execute([$codigo, $nombre, $direccion, $website, $pais, $email, $telefono, $cif]);
+            $stmt = $this->pdo->prepare('UPDATE categoria SET id_categoria=?, nombre_categoria=?, id_padre=? WHERE id_categoria=?');
+            return $stmt->execute([$id, $nombre, $id_padre, $idOriginal]);
         } catch (PDOException $ex) {
-            echo "cant update for some reason: " . $ex->getMessage();
+            echo "cant update for some reason: " . $ex->getMossage();
             return false;
         }
     }

@@ -75,7 +75,7 @@ class ProveedorController extends \Com\Daw2\Core\BaseController {
             if ($result == 1) {
                 header('Location: /proveedores');
             } else if ($result == 0) {
-                header('Location: /proveedores/cant_add)');
+                header('Location: /proveedores/cant_add');
             } else {
                 header('location: methodNotAllowed');
             }
