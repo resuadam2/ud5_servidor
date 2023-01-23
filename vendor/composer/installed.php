@@ -3,7 +3,7 @@
         'name' => 'com/daw2',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'ac73fe785dbbbb9ac4b034a8a2ed2a55a6699736',
+        'reference' => '7f8a402ff10b0a8634905ac9ac23288e59545f6c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'com/daw2' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'ac73fe785dbbbb9ac4b034a8a2ed2a55a6699736',
+            'reference' => '7f8a402ff10b0a8634905ac9ac23288e59545f6c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
