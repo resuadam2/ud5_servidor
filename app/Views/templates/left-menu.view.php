@@ -94,6 +94,77 @@
                 </li>
             </ul>
         </li>                   
+        <!-- Add icons to the links using the .nav-icon class
+    with font-awesome or any other icon font library -->
+        <li class="nav-item <?php echo (isset($seccion) && strpos($seccion, '/cookie') === 0) ? 'menu-open' : ''; ?>">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-cookie-bite"></i>
+                <p>
+                    Cookies
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/cookie/test" class="nav-link <?php echo isset($seccion) && $seccion === '/cookie/test' ? 'active' : ''; ?>">
+                        <i class="fas fa-plus nav-icon"></i>
+                        <p>Test Cookie</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/cookie/borrar" class="nav-link <?php echo isset($seccion) && $seccion === '/cookie/borrar' ? 'active' : ''; ?>">
+                        <i class="fas fa-trash nav-icon"></i>
+                        <p>Borrar Cookie</p>
+                    </a>
+                </li>              
+            </ul>
+        </li> 
+        <li class="nav-item <?php echo (isset($seccion) && strpos($seccion, '/session') === 0) ? 'menu-open' : ''; ?>">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-server"></i>
+                <p>
+                    Session
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/session/form" class="nav-link <?php echo isset($seccion) && $seccion === '/session/form' ? 'active' : ''; ?>">
+                        <i class="fas fa-edit nav-icon"></i>
+                        <p>Formulario</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/session/borrar" class="nav-link <?php echo isset($seccion) && $seccion === '/session/borrar' ? 'active' : ''; ?>">
+                        <i class="fas fa-trash nav-icon"></i>
+                        <p>Borrar Session</p>
+                    </a>
+                </li>              
+            </ul>
+        </li> 
+        <li class="nav-item <?php echo (isset($seccion) && strpos($seccion, '/login') === 0) ? 'menu-open' : ''; ?>">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-key"></i>
+                <p>
+                    Password seguro
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>   
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="/login" class="nav-link <?php echo isset($seccion) && $seccion === '/login' ? 'active' : ''; ?>">
+                        <i class="fas fa-sign-in-alt nav-icon"></i>
+                        <p>Formulario login</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/login/test-insert" class="nav-link <?php echo isset($seccion) && $seccion === '/login/test-insert' ? 'active' : ''; ?>">
+                        <i class="fas fa-user-plus nav-icon"></i>
+                        <p>Insertar usuarios</p>
+                    </a>
+                </li>
+            </ul>
+        </li> 
     </ul>
 </nav>
 <!-- /.sidebar-menu -->

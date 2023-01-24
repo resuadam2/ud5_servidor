@@ -266,6 +266,64 @@ class FrontController {
                 }
                 , 'get');
 
+        # Ejemplos Cookies y Sesiones:
+
+        Route::add('/cookie/test',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\CookiesController();
+                    $controlador->testCookie();
+                }
+                , 'get');
+
+        Route::add('/cookie/borrar',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\CookiesController();
+                    $controlador->borrarCookie();
+                }
+                , 'get');
+
+        Route::add('/session/form',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\SessionController();
+                    $controlador->sessionForm();
+                }
+                , 'get');
+
+        Route::add('/session/form',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\SessionController();
+                    $controlador->sessionFormProcess();
+                }
+                , 'post');
+
+        Route::add('/session/borrar',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\SessionController();
+                    $controlador->borrarVariableSession();
+                }
+                , 'get');
+
+        Route::add('/login',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->login();
+                }
+                , 'get');
+
+        Route::add('/login',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->loginProcess();
+                }
+                , 'post');
+
+        Route::add('/login/test-insert',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->testInsert();
+                }
+                , 'get');
+
         Route::pathNotFound(
                 function () {
                     $controller = new \Com\Daw2\Controllers\ErroresController();
