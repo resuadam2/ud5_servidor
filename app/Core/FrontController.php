@@ -267,6 +267,20 @@ class FrontController {
                 , 'get');
 
         # Ejemplos Cookies y Sesiones:
+                
+        Route::add('/dark',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\CookiesController();
+                    $controlador->darkMode();
+                }
+                , 'get');
+                
+        Route::add('/light',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\CookiesController();
+                    $controlador->lightMode();
+                }
+                , 'get');
 
         Route::add('/cookie/test',
                 function () {

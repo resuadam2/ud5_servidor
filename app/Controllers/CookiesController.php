@@ -31,4 +31,19 @@ class CookiesController extends \Com\Daw2\Core\BaseController {
         }
         $this->view->showViews(array('templates/header.view.php', 'cookies.view.php', 'templates/footer.view.php'), array('titulo' => 'Borrar Cookies', 'seccion' => '/cookie/borrar'));     
     }
+    
+    public function darkMode() {
+        setCookie('dark','true');
+        $url = substr($_SERVER['REQUEST_URI'],0,5);
+        header('location: '.$url);
+        //header('location: /');
+    }
+    
+    public function lightMode() {
+        if(isset($_COOKIE['dark'])){
+            unset($_COOKIE['dark']);
+            setcookie('dark', '', time()-3600);
+        }
+        header('Location: /');
+    }
 }
