@@ -11,7 +11,7 @@
               <div class="icon">
                 <i class="ion ion-bag"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/productos" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -19,14 +19,17 @@
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
-                <h3>20</h3>
+                  <h3><?php 
+                    $categoriasController = new \Com\Daw2\Controllers\CategoriaController();
+                    echo $categoriasController->size();
+                ?></h3>
 
                 <p>Categorías</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/categorias" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -34,14 +37,17 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>32</h3>
+                <h3><?php 
+                    $controllerProveedores = new \Com\Daw2\Controllers\ProveedorController();
+                    echo $controllerProveedores->size();
+                ?></h3>
 
                 <p>Proveedores</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-add"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/proveedores" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>       
           <!-- ./col -->

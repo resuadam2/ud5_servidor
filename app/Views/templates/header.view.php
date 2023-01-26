@@ -56,7 +56,7 @@
       </li>' ;
           ?>
       <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+        <a class="nav-link" data-widget="navbar-search" href="/session/borrar" role="button">
           <i class="text-danger fas fa-sign-out-alt"></i>
         </a>        
       </li>
@@ -85,7 +85,7 @@
           <img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Usuario</a>
+          <a href="/session/form" class="d-block"> <?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '<i>Sin establecer</i>';?> </a>
         </div>
       </div>
      
@@ -107,7 +107,6 @@
             echo isset($titulo) ? $titulo : '' ?></h1>
           </div><!-- /.col -->
           <?php 
-                echo var_dump($_SERVER['REDIRECT_URL']);
           if(isset($breadcrumb) && is_array($breadcrumb)){
               ?>          
           <div class="col-sm-6">

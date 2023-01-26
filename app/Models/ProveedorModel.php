@@ -10,6 +10,11 @@ class ProveedorModel extends \Com\Daw2\Core\BaseModel {
         $stmt = $this->pdo->query('SELECT * FROM proveedor');
         return $stmt->fetchAll();
     }
+    
+    function size() : int {
+        $stmt = $this->pdo->query('SELECT * FROM proveedor');
+        return count($stmt->fetchAll());
+    }
 
     function delete(string $cif): int {
         try { #if there are products enroled to the provider returns 0

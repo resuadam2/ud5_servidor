@@ -34,9 +34,7 @@ class CookiesController extends \Com\Daw2\Core\BaseController {
     
     public function darkMode() {
         setCookie('dark','true');
-        $url = substr($_SERVER['REQUEST_URI'],0,5);
-        header('location: '.$url);
-        //header('location: /');
+        header('location: /');
     }
     
     public function lightMode() {

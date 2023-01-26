@@ -15,12 +15,12 @@
                             <!-- select -->                            
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="nombre">Nuevo nombre de usuario:</label>
-                                    <input type="text" name="nombre" id="nombre" class="form-control" value="<?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : ''; ?>" />
+                                    <label for="usuario">Nuevo nombre de usuario:</label>
+                                    <input type="text" name="usuario" id="usuario" class="form-control" value="<?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : ''; ?>" />
                                     <?php
-                                    if(isset($errors['nombre'])){
+                                    if(isset($errors['usuario'])){
                                     ?>
-                                    <p class="text-danger"><small><?php echo $errors['nombre']; ?></small></p>
+                                    <p class="text-danger"><small><?php echo $errors['usuario']; ?></small></p>
                                     <?php
                                     }
                                     ?>

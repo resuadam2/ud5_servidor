@@ -10,6 +10,11 @@ class CategoriaModel extends \Com\Daw2\Core\BaseModel {
         $stmt = $this->pdo->query('SELECT * FROM categoria');
         return $stmt->fetchAll();
     }
+    
+    function size() : int {
+        $stmt = $this->pdo->query('SELECT * FROM categoria');
+        return count($stmt->fetchAll());
+    }
 
     function getNombreCategoria(string $id): array {
         $stmt = $this->pdo->prepare('SELECT nombre_categoria FROM categoria WHERE id_categoria=?');

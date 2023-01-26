@@ -16,6 +16,11 @@ class ProveedorController extends \Com\Daw2\Core\BaseController {
 
         $this->view->showViews(array('templates/header.view.php', 'proveedores.view.php', 'templates/footer.view.php'), $data);
     }
+    
+    function size() : int {
+        $modelo = new \Com\Daw2\Models\ProveedorModel();
+        return $modelo->size();
+    }
 
     function mostrarAdd() {
         $data = [];

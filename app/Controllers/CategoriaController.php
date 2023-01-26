@@ -16,6 +16,11 @@ class CategoriaController extends \Com\Daw2\Core\BaseController {
 
         $this->view->showViews(array('templates/header.view.php', 'categorias.view.php', 'templates/footer.view.php'), $data);
     }
+    
+     function size() : int {
+        $modelo = new \Com\Daw2\Models\CategoriaModel();
+        return $modelo->size();
+    }
 
     function getNombreCategoria(string $id): string {
         $modelo = new \Com\Daw2\Models\CategoriaModel();
