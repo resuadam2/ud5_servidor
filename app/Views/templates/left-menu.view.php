@@ -49,7 +49,15 @@
                     <i class="right fas fa-angle-left"></i>
                 </p>
             </a>
+
             <ul class="nav nav-treeview">
+                   <li class="nav-item">
+                    <a href="/usuarios_sistema" class="nav-link <?php echo isset($seccion) && $seccion === '/usuarios_sistema' ? 'active' : ''; ?>">
+                        <i class="fas fa-users nav-icon"></i>
+                        <p>Usuarios del Sistema</p>
+                    </a>
+                </li>
+                            <!--
                 <li class="nav-item">
                     <a href="/usuarios" class="nav-link <?php echo isset($seccion) && $seccion === '/usuarios' ? 'active' : ''; ?>">
                         <i class="fas fa-users nav-icon"></i>
@@ -74,6 +82,7 @@
                         <p>Usuarios Carlos</p>
                     </a>
                 </li>
+            -->
                 <li class="nav-item">
                     <a href="/productos" class="nav-link <?php echo isset($seccion) && $seccion === '/productos' ? 'active' : ''; ?>">
                         <i class="fas fa-shopping-bag nav-icon"></i>

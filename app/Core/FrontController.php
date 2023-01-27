@@ -7,13 +7,74 @@ use Steampixel\Route;
 class FrontController {
 
     static function main() {
+        session_start();
         Route::add('/',
                 function () {
                     $controlador = new \Com\Daw2\Controllers\InicioController();
                     $controlador->index();
                 }
                 , 'get');
+                
+        #Gestión de usuarios del sistema:
+                
+                Route::add('/usuarios_sistema',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->mostrarTodos();
+                }
+                , 'get');
 
+        Route::add('/usuario_sistema/view/([A-Za-z0-9]+)',
+                function ($id) {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->view($id);
+                }
+                , 'get');
+
+        Route::add('/usuario_sistema/delete/([A-Za-z0-9]+)',
+                function ($id) {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->delete($id);
+                }
+                , 'get');
+
+        Route::add('/usuario_sistema/edit/([A-Za-z0-9]+)',
+                function ($id) {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->mostrarEdit($id);
+                }
+                , 'get');
+
+        Route::add('/usuario_sistema/edit/([A-Za-z0-9]+)',
+                function ($id) {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->edit($id);
+                }
+                , 'post');
+
+        Route::add('/usuario_sistema/add',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->mostrarAdd();
+                }
+                , 'get');
+
+        Route::add('/usuario_sistema/add',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->add();
+                }
+                , 'post');
+
+        Route::add('/usuario_sistema/cant_add',
+                function () {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->cant_add();
+                }
+                , 'get');
+                
+        #Ejemplos con CSVs
+                /*
         Route::add('/csv/historico',
                 function () {
                     $controlador = new \Com\Daw2\Controllers\CSVController();
@@ -49,6 +110,8 @@ class FrontController {
                 }
                 , 'post');
 
+                */
+                /*
         Route::add('/usuario/test',
                 function () {
                     $controlador = new \Com\Daw2\Controllers\UsuarioController();
@@ -90,6 +153,8 @@ class FrontController {
                     $controlador->mostrarUsuariosCarlos();
                 }
                 , 'get');
+                 * 
+                 */
 
         # Gestion de categorías
 

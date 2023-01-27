@@ -56,7 +56,7 @@
       </li>' ;
           ?>
       <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="/session/borrar" role="button">
+        <a class="nav-link" href="/session/borrar" role="button">
           <i class="text-danger fas fa-sign-out-alt"></i>
         </a>        
       </li>

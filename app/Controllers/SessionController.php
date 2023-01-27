@@ -13,7 +13,6 @@ class SessionController extends \Com\Daw2\Core\BaseController {
     }
     
     public function sessionFormProcess(){ 
-        session_start();
         $_errors = [];
         if(strlen($_POST['usuario'])){
             /* Si viene JS o HTML lo guardamos tal cual pero debemos tenerlo 
@@ -38,8 +37,8 @@ class SessionController extends \Com\Daw2\Core\BaseController {
         );
         //unset($_SESSION['nombre']); //Borramos sólo una variable
         session_unset(); //Borra todas la variables
-        //session_destroy();//Destruye la sesión
+        session_destroy();//Destruye la sesión
         
-        $this->view->showViews(array('templates/header.view.php', 'session.view.php', 'templates/footer.view.php'), $_vars);     
+        $this->view->showViews(array('templates/header.view.php', 'inicio.view.php', 'templates/footer.view.php'), $_vars);     
     }
 }

@@ -32,4 +32,87 @@ class UsuarioSistemaController extends \Com\Daw2\Core\BaseController
    }
    
    
+    function mostrarTodos() {
+        $data = [];
+        $data['titulo'] = 'Todos los usuarios del sistema';
+        $data['seccion'] = '/usuarios_sistema';
+        
+        $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
+        $data['usuarios_sistema'] = $modelo->getAll();
+
+        $this->view->showViews(array('templates/header.view.php', 'usuarios_sistema.view.php', 'templates/footer.view.php'), $data);
+    }
+    
+       function mostrarAdd() {
+        $data = [];
+        $data['titulo'] = 'Nuevo usuario del sistema';
+        $data['seccion'] = '/usuario_sistema/add';
+        $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
+        $data['roles'] = $modelo->getAllRoles();
+        $this->view->showViews(array('templates/header.view.php', 'add.usuario_sistema.view.php', 'templates/footer.view.php'), $data);
+    }
+    
+   public function add() : void {
+       $data = [];
+        $data['titulo'] = 'Nuevo usuario del sistema';
+        $data['seccion'] = '/usuario_sistema/add';
+        $data['errores'] = $this->checkFormAdd($_POST);
+        if (count($data['errores']) === 0) {
+            $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
+            $result = $modelo->add($_POST['nombre'], $_POST['pass'], $_POST['email'], $_POST['id_rol'], $_POST['idioma']);
+
+            if ($result == 1) {
+                header('Location: /usuarios_sistema');
+            } else if ($result == 0) {
+                header('Location: /usuario_sistema/cant_add');
+            } else {
+                header('location: methodNotAllowed');
+            }
+        } else {
+            $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+            $this->view->showViews(array('templates/header-datatable.view.php', 'add.usuario_sistema.view.php', 'templates/footer-datatable.view.php'), $data);
+        }
+    }
+   
+    function cant_add() {
+        $data = [];
+        $data['titulo'] = 'No se puede crear el usuario debido a que el email ya existe.';
+        $data['seccion'] = '/usuario_sistema/add';
+        $this->view->showViews(array('templates/header.view.php', 'usuarios_sistema.view.php', 'templates/footer.view.php'), $data);
+    }
+    
+        function getNombreRol(string $id): string {
+        $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
+        $toret =  $modelo->getNombreRol($id)[0];
+        return $toret['nombre_rol'];
+    }
+    
+    function checkFormAdd(array $post): array {
+        $errores = [];
+        if (empty($post['nombre'])) {
+            $errores['nombre'] = "Campo obligatorio";
+        }
+        
+        if (empty($post['pass'])) {
+            $errores['pass'] = "Campo obligatorio";
+        }
+        
+        
+        // Pendiente verificar unique
+        if (empty($post['email'])) {
+            $errores['email'] = "Campo obligatorio";
+        }
+
+        
+        
+        if (empty($post['id_rol'])) {
+            $errores['id_rol'] = "Campo obligatorio";
+        }
+        
+        if (empty($post['idioma'])) {
+            $errores['idioma'] = "Campo obligatorio";
+        }
+
+        return $errores;
+    }
 }
