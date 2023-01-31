@@ -37,6 +37,13 @@ class FrontController {
                     $controlador->delete($id);
                 }
                 , 'get');
+                
+        Route::add('/usuario_sistema/baja/([A-Za-z0-9]+)',
+                function ($id) {
+                    $controlador = new \Com\Daw2\Controllers\UsuarioSistemaController();
+                    $controlador->baja($id);
+                }
+                , 'get');                
 
         Route::add('/usuario_sistema/edit/([A-Za-z0-9]+)',
                 function ($id) {

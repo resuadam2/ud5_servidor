@@ -41,7 +41,7 @@ class UsuarioSistemaModel extends \Com\Daw2\Core\BaseModel {
         $stmt = $this->pdo->query('SELECT * FROM usuario_sistema');
         return $stmt->fetchAll();
     }
-    
+
     function getAllRoles(): array {
         $stmt = $this->pdo->query('SELECT * FROM aux_rol');
         return $stmt->fetchAll();
@@ -70,17 +70,40 @@ class UsuarioSistemaModel extends \Com\Daw2\Core\BaseModel {
             return -1;
         }
     }
+    
+    function baja(string $id): bool {
+        try {
+            #if everything was ok return 1
+            $prev = $this->pdo->prepare('SELECT baja FROM usuario_sistema WHERE id_usuario=?');
+            $prev->execute([$id]);
+            $baja[] = $prev->fetchAll();
+            $stmt = $this->pdo->prepare('UPDATE usuario_sistema SET baja=? WHERE id_usuario=?');
+            if($baja[0] !== '0') {
+                return $stmt->execute([0,$id]);
+            } else {
+                return $stmt->execute([1,$id]); # No está funcionando esta opción!!!!
+            }
+           
+        } catch (PDOException $exception) { #if an exception happens return a -1
+            return -1;
+        }
+    }
 
-    function add(string $nombre, string $pass, string $email, string $id_rol, string $idioma): bool {
+    function view(string $id): array {
+        $stmt = $this->pdo->prepare('SELECT * FROM usuario_sistema WHERE id_usuario=?');
+        $stmt->execute([$id]);
+        return $stmt->fetchAll();
+    }
+
+    function add(string $nombre, string $pass, string $email, string $id_rol, string $idioma): string {
         try {
             $stmt = $this->pdo->prepare('INSERT INTO usuario_sistema(id_rol, email, pass, nombre, idioma, last_date, baja) values (?,?,?,?,?,?,?)');
             $pass = password_hash($pass, PASSWORD_BCRYPT);
             return $stmt->execute([
-                $id_rol, $email, $pass, $nombre, $idioma, null, 0]
-            );          
+                        $id_rol, $email, $pass, $nombre, $idioma, null, 0]
+                    ) . "";
         } catch (\PDOException $e) {
-            echo $e->getMessage();
-            return false;
+            return $e->getMessage();
         }
     }
 
