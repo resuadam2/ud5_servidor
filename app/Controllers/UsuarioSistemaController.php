@@ -61,8 +61,8 @@ class UsuarioSistemaController extends \Com\Daw2\Core\BaseController {
             header('location: methodNotAllowed');
         }
     }
-    
-      function baja(string $id) {
+
+    function baja(string $id) {
         $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
         $result = $modelo->baja($id);
         if ($result) {
@@ -114,6 +114,52 @@ class UsuarioSistemaController extends \Com\Daw2\Core\BaseController {
         $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
         $toret = $modelo->getNombreRol($id)[0];
         return $toret['nombre_rol'];
+    }
+
+    function getNombre($id): string {
+        $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
+        $toret = $modelo->getNombre($id)[0];
+        return $toret['nombre'];
+    }
+
+    function mostrarEdit($id) {
+        $data = [];
+        $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
+        $data['usuarios_sistema'] = $modelo->getAll();
+        $data['titulo'] = 'Usuario ' . $this->getNombre($id) . ' con ID: ' . $id;
+        $data['usuario_sistema'] = $modelo->showEdit($id);
+        $data['roles'] = $modelo->getAllRoles();
+
+        $this->view->showViews(array('templates/header.view.php', 'edit.usuario_sistema.view.php', 'templates/footer.view.php'), $data);
+    }
+
+    function edit($id): void {
+        $data = [];
+        $data['titulo'] = 'Usuario del sistema con ID ' . $id;
+        $data['seccion'] = '/usuario_sistema/edit/' . $id;
+        $data['errores'] = $this->checkFormAdd($_POST);
+        if (count($data['errores']) === 0) {
+            $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
+            $result = $modelo->edit($id, $_POST['nombre'], $_POST['id_rol'], $_POST['email'], $_POST['pass'], $_POST['idioma']);
+            if ($result) {
+                header('Location: /usuarios_sistema');
+            } else {
+                $this->cant_edit($id);
+            }
+        } else {
+            $data['input'] = filter_var_array($_POST, FILTER_SANITIZE_SPECIAL_CHARS);
+            $this->view->showViews(array('templates/header-datatable.view.php', 'edit.usuario_sistema.view.php', 'templates/footer-datatable.view.php'), $data);
+        }
+    }
+
+    function cant_edit(string $id) {
+        $data = [];
+        $data['titulo'] = 'No se ha podido editar el usuario del sistema con ID ' . $id . '';
+        $data['seccion'] = '/usuarios_sistema';
+        $modelo = new \Com\Daw2\Models\CategoriaModel();
+        $data['usuarios_sistema'] = $modelo->showEdit($id);
+
+        $this->view->showViews(array('templates/header.view.php', 'edit.usuario_sistema.view.php', 'templates/footer.view.php'), $data);
     }
 
     function checkFormAdd(array $post): array {

@@ -42,6 +42,12 @@ class UsuarioSistemaModel extends \Com\Daw2\Core\BaseModel {
         return $stmt->fetchAll();
     }
 
+    function getNombre(string $id): array {
+        $stmt = $this->pdo->prepare('SELECT nombre FROM usuario_sistema WHERE id_usuario=?');
+        $stmt->execute([$id]);
+        return $stmt->fetchAll();
+    }
+
     function getAllRoles(): array {
         $stmt = $this->pdo->query('SELECT * FROM aux_rol');
         return $stmt->fetchAll();
@@ -70,20 +76,19 @@ class UsuarioSistemaModel extends \Com\Daw2\Core\BaseModel {
             return -1;
         }
     }
-    
+
     function baja(string $id): bool {
         try {
             $prev = $this->pdo->prepare('SELECT baja FROM usuario_sistema WHERE id_usuario=?');
             $prev->execute([$id]);
             $actual = $prev->fetchAll();
-            $baja = $actual[0];          
+            $baja = $actual[0];
             $stmt = $this->pdo->prepare('UPDATE usuario_sistema SET baja=? WHERE id_usuario=?');
-            if($baja['baja'] == 0 ) {
-                return $stmt->execute(['1',$id]);
+            if ($baja['baja'] == 0) {
+                return $stmt->execute(['1', $id]);
             } else {
-                return $stmt->execute(['0',$id]);
+                return $stmt->execute(['0', $id]);
             }
-           
         } catch (PDOException $exception) { #if an exception happens return false
             return false;
         }
@@ -104,6 +109,23 @@ class UsuarioSistemaModel extends \Com\Daw2\Core\BaseModel {
                     ) . "";
         } catch (\PDOException $e) {
             return $e->getMessage();
+        }
+    }
+
+    function showEdit(string $id): array {
+        $stmt = $this->pdo->prepare('SELECT * FROM usuario_sistema WHERE id_usuario=?');
+        $stmt->execute([$id]);
+        return $stmt->fetchAll();
+    }
+
+    function edit(string $id, string $nombre, string $id_rol, string $email, string $pass, string $idioma): bool {
+        try {
+            $stmt = $this->pdo->prepare('UPDATE usuario_sistema SET nombre=?, id_rol=?, email=?, pass=?, idioma=? WHERE id_usuario=?');
+            $pass = password_hash($pass, PASSWORD_BCRYPT);
+            return $stmt->execute([$nombre, $id_rol, $email, $pass, $baja, $idioma, $id]);
+        } catch (PDOException $ex) {
+            echo "cant update for some reason: " . $ex->getMossage();
+            return false;
         }
     }
 

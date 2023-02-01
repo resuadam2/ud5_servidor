@@ -13,7 +13,7 @@
             </div>
             <!-- Card Body -->
             <div class="card-body">
-                <form action="/categorias/edit/<?php echo $actual['id_categoria'] ?>"" method="post">         
+                <form action="/categorias/edit/<?php echo $actual['id_categoria'] ?>" method="post">         
                     <!--form method="get"-->
                     <div class="row">
                         <div class="mb-3 col-sm-3">
