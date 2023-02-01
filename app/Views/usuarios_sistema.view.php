@@ -38,7 +38,7 @@
                             <?php
                             foreach ($usuarios_sistema as $u) {
                                 ?>
-                            <tr class="<?php echo $u['baja'] != '0' ? 'table-danger': ''; ?>">
+                            <tr class="<?php echo $u['baja'] != '0' ? 'table-warning': ''; ?>">
                                     <td><?php echo $u['id_usuario']; ?></td>
                                     <td><?php echo $u['nombre']; ?></td>
                                     <td><?php echo $u['email']; ?></td>    
@@ -54,7 +54,8 @@
                                     <td>
                                         <a href="/usuario_sistema/view/<?php echo $u['id_usuario']; ?>" class="btn btn-default ml-1"><i class="fas fa-eye"></i></a>
                                         <a href="/usuario_sistema/edit/<?php echo $u['id_usuario']; ?>" class="btn btn-success ml-1"><i class="fas fa-edit"></i></a>
-                                        <a href="/usuario_sistema/baja/<?php echo $u['id_usuario']; ?>" class="btn btn-info ml-1"><i class="fas fa-ban"></i></a>
+                                        <a href="/usuario_sistema/baja/<?php echo $u['id_usuario']; ?>" class="btn <?php echo $u['baja'] != '0' ? 'btn-secondary': 'btn-secondary'; ?> ml-1">
+                                            <i class="<?php echo $u['baja'] != '0' ? 'fas fa-toggle-off': 'fas fa-toggle-on'; ?>"></i></a>
                                         <a href="/usuario_sistema/delete/<?php echo $u['id_usuario']; ?>" class="btn btn-danger ml-1"><i class="fas fa-trash"></i></a>
                                     </td>
 

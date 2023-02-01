@@ -73,19 +73,19 @@ class UsuarioSistemaModel extends \Com\Daw2\Core\BaseModel {
     
     function baja(string $id): bool {
         try {
-            #if everything was ok return 1
             $prev = $this->pdo->prepare('SELECT baja FROM usuario_sistema WHERE id_usuario=?');
             $prev->execute([$id]);
-            $baja[] = $prev->fetchAll();
+            $actual = $prev->fetchAll();
+            $baja = $actual[0];          
             $stmt = $this->pdo->prepare('UPDATE usuario_sistema SET baja=? WHERE id_usuario=?');
-            if($baja[0] !== '0') {
-                return $stmt->execute([0,$id]);
+            if($baja['baja'] == 0 ) {
+                return $stmt->execute(['1',$id]);
             } else {
-                return $stmt->execute([1,$id]); # No está funcionando esta opción!!!!
+                return $stmt->execute(['0',$id]);
             }
            
-        } catch (PDOException $exception) { #if an exception happens return a -1
-            return -1;
+        } catch (PDOException $exception) { #if an exception happens return false
+            return false;
         }
     }
 
