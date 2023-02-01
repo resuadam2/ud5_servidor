@@ -32,6 +32,7 @@
                                 <th>Nombre</th>                          
                                 <th>Email</th>                            
                                 <th>Rol</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,11 +53,11 @@
 
 
                                     <td>
-                                        <a href="/usuario_sistema/view/<?php echo $u['id_usuario']; ?>" class="btn btn-default ml-1"><i class="fas fa-eye"></i></a>
-                                        <a href="/usuario_sistema/edit/<?php echo $u['id_usuario']; ?>" class="btn btn-success ml-1"><i class="fas fa-edit"></i></a>
-                                        <a href="/usuario_sistema/baja/<?php echo $u['id_usuario']; ?>" class="btn <?php echo $u['baja'] != '0' ? 'btn-secondary': 'btn-secondary'; ?> ml-1">
+                                        <a href="/usuario_sistema/view/<?php echo $u['id_usuario']; ?>" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></a>
+                                        <a href="/usuario_sistema/edit/<?php echo $u['id_usuario']; ?>" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                        <a href="/usuario_sistema/baja/<?php echo $u['id_usuario']; ?>" class="btn <?php echo $u['baja'] != '0' ? 'btn-secondary': 'btn-secondary'; ?> btn-sm">
                                             <i class="<?php echo $u['baja'] != '0' ? 'fas fa-toggle-off': 'fas fa-toggle-on'; ?>"></i></a>
-                                        <a href="/usuario_sistema/delete/<?php echo $u['id_usuario']; ?>" class="btn btn-danger ml-1"><i class="fas fa-trash"></i></a>
+                                        <a href="/usuario_sistema/delete/<?php echo $u['id_usuario']; ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a>
                                     </td>
 
                                 </tr>

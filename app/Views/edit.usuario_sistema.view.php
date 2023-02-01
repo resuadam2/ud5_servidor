@@ -4,6 +4,9 @@
  <?php
     $actual = $usuario_sistema[0];
     $controller = new \Com\Daw2\Controllers\UsuarioSistemaController();
+    if($errores != null) {
+        echo var_dump($errores);
+    }
     ?>
     <div class="col-12">
         <div class="card shadow mb-4">
@@ -35,7 +38,7 @@
                             <label for="id_rol">Rol del usuario</label>
                             <select class="form-control select2-container--default" name="id_rol">
                                   <?php
-                                if ($actual['id_rol'] !== null) {
+                                        if ($actual['id_rol'] !== null) {
                                     ?>
                                 <option value="<?php $actual['id_rol'] ?>" selected><?php echo $controller->getNombreRol($actual['id_rol']); ?> </option>                                                                
                                 <?php
