@@ -56,8 +56,9 @@
       </li>' ;
           ?>
       <li class="nav-item">
-        <a class="nav-link" href="/session/borrar" role="button">
-          <i class="text-danger fas fa-sign-out-alt"></i>
+        <a class="nav-link" href="<?php echo isset($_SESSION['id_usuario']) ? '/session/borrar' : '/login';?>" role="button">
+          <i class="text-danger fas fa-sign-out-alt"></i> 
+          <?php # modificar icono y color dependiendo de login o logout?>
         </a>        
       </li>
       <li class="nav-item">
@@ -85,7 +86,8 @@
           <img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="/session/form" class="d-block"> <?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '<i>Sin establecer</i>';?> </a>
+          <a href="<?php echo isset($_SESSION['id_usuario']) ? '/profile/'.$_SESSION['id_usuario'] : '/login';?>"
+                class="d-block"> <?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : '<i>Sin establecer</i>';?> </a>
         </div>
       </div>
      

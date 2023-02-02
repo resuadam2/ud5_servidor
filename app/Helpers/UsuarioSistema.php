@@ -9,9 +9,7 @@ class UsuarioSistema{
     private $nombre;
     private $idioma;
     private $baja;
-    
-    //private function __construct(){}
-    
+        
     public function __construct(?int $idUsuario, Rol $rol, string $email, string $nombre, string $idioma, string $baja){
         $this->idUsuario = $idUsuario;
         $this->rol = $rol;
@@ -28,7 +26,7 @@ class UsuarioSistema{
     public function getRol() : Rol {
         return $this->rol;
     }
-
+    
     public function getEmail() : string{
         return $this->email;
     }

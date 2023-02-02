@@ -2,49 +2,30 @@
 namespace Com\Daw2\Helpers;
 
 class Rol{
-    private $idRol;
-    private $rol;
-    private $descripcionEs;
-    private $descripcionEn;
-    private $_permisos;
+    private $id_rol;
+    private $nombre_rol;
+     
     
-    private static $_PERMISOS_ADMIN = array(
-            'UsuariosSistema' => ['r', 'w', 'x', 'd']
-    );    
-    
-    public function __construct(int $idRol, string $rol, string $descripcionEs, string $descripcionEn) {
-        $this->descripcionEn = $descripcionEn;
-        $this->descripcionEs = $descripcionEs;
-        $this->idRol = $idRol;
-        $this->$rol = $rol;
-        if($idRol == 1){
-            $this->_permisos = self::$_PERMISOS_ADMIN;
-        }
+    public function __construct(int $id_rol, string $nombre_rol) {
+        $this->id_rol = $id_rol;
+        $this->nombre_rol = $nombre_rol;
     }
-    
-    public function getIdRol() : int{
-        return $this->idRol;
+    public function getIdRol() {
+        return $this->id_rol;
     }
 
-    public function getRol() : string{
-        return $this->rol;
+    public function getNombreRol() {
+        return $this->nombre_rol;
     }
 
-    public function getDescripcionEs() : string {
-        return $this->descripcionEs;
+    public function setId_rol($id_rol): void {
+        $this->id_rol = $id_rol;
     }
 
-    public function getDescripcionEn() : string{
-        return $this->descripcionEn;
+    public function setNombre_rol($nombre_rol): void {
+        $this->nombre_rol = $nombre_rol;
     }
-    
-    public function checkPermiso(string $controller, string $operacion) : bool{
-        if(isset($this->_permisos[$controller])){
-            return in_array($operacion, $this->_permisos[$operacion]);
-        }
-        else{
-            return false;
-        }
-    }
+
+
 
 }
