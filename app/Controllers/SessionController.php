@@ -4,6 +4,8 @@ namespace Com\Daw2\Controllers;
 
 class SessionController extends \Com\Daw2\Core\BaseController {
     
+    
+    
     public function sessionForm(){        
         $_vars = array(
             'titulo' => 'Form Session',
@@ -32,7 +34,7 @@ class SessionController extends \Com\Daw2\Core\BaseController {
     
     public function borrarVariableSession(){
         $_vars = array(
-            'titulo' => 'Borrar Session',
+            'titulo' => 'Sesión Cerrada',
             'seccion' => '/session/borrar'
         );
         //unset($_SESSION['nombre']); //Borramos sólo una variable

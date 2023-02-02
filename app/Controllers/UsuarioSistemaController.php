@@ -192,4 +192,15 @@ class UsuarioSistemaController extends \Com\Daw2\Core\BaseController {
         return $errores;
     }
 
+    
+    #PROFILE SIDE OF USUARIO_SISTEMA:
+      function profile(string $id) {
+        $data = [];
+        $modelo = new \Com\Daw2\Models\UsuarioSistemaModel();
+        $aux = $modelo->getNombre($id)[0];
+        $data['titulo'] = 'Perfil de ' . $aux['nombre'];
+        $data['usuarios_sistema'] = $modelo->view($id);
+
+        $this->view->showViews(array('templates/header.view.php', 'profile.usuario_sistema.view.php', 'templates/footer.view.php'), $data);
+    }
 }

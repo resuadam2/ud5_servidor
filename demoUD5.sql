@@ -2195,7 +2195,7 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `usuario_sistema`
 --
 ALTER TABLE `usuario_sistema`
-  ADD CONSTRAINT `FK_usuario_rol` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id_rol`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_usuario_rol` FOREIGN KEY (`id_rol`) REFERENCES `aux_rol` (`id_rol`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

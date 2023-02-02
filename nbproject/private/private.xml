@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/mnt/perfiles/dani/www-host/ud5_servidor/app/Views/usuarios_sistema.view.php</file>
-            <file>file:/mnt/perfiles/dani/www-host/ud5_servidor/app/Models/UsuarioSistemaModel.php</file>
-            <file>file:/mnt/perfiles/dani/www-host/ud5_servidor/app/Views/detail.usuario_sistema.view.php</file>
-            <file>file:/mnt/perfiles/dani/www-host/ud5_servidor/app/Views/detail.categoria.view.php</file>
-            <file>file:/mnt/perfiles/dani/www-host/ud5_servidor/app/Core/FrontController.php</file>
-            <file>file:/mnt/perfiles/dani/www-host/ud5_servidor/app/Controllers/UsuarioSistemaController.php</file>
-            <file>file:/mnt/perfiles/dani/www-host/ud5_servidor/app/Models/CategoriaModel.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
